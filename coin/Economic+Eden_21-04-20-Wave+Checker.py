@@ -10,16 +10,16 @@
  #########################################################################
 import pyupbit						
 import time	
-access = "엑세스 키 입력"							    # 엑세스 키 입력					
-secret = "시크릿 키 입력"	                            # 시크릿 키 입력
-upbit = pyupbit.Upbit(access, secret)                                           # 로그인 
+access = "9iTK0V8wx8E63BxCmSii08gHZ0xzrBJWNkKPKGHk"												
+secret = "OFQb4bQti4SQlhksbDvifJfRxTbtDaj9KcnlrFXh"	
+upbit = pyupbit.Upbit(access, secret)	
 
 #########################################################################
 # 텔레그램 연결
 #########################################################################
-import telegram                                                                 
-tlgm_token = '텔레그램 토큰 입력'                   
-tlgm_id = '텔레그램 챗 아이디 입력'                                                          
+import telegram
+tlgm_token = '1772750536:AAFHXUrrcXi15DnUyJ99ZEb5WwqOaZIOE6A'
+tlgm_id = '1059240009'                                                          
 bot = telegram.Bot(token = tlgm_token)                                          
 updates = bot.getUpdates()                                                      
 bot.sendMessage(chat_id = tlgm_id, text = 'Wave Checker')                   
