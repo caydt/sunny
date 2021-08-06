@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Mar 23 23:36:39 2021
+
 
 생존형 퀀트의 경제적자유   https://blog.naver.com/starfox119
 
-BC님, 트레이더92님. 정말 너무너무 감사 드립니다. 
 
-"""
 
  #########################################################################
  # 업비트 로그인
@@ -39,88 +36,6 @@ margin = 0
 #########################################################################
 
 tickers = pyupbit.get_tickers(fiat = "KRW")
-
-tickers = ['KRW-BTC',
-
-'KRW-ADA',
-
-'KRW-ATOM',
-
-'KRW-AXS',
-
-'KRW-BAT',
-
-'KRW-BCH',
-
-'KRW-BTT',
-
-'KRW-CHZ',
-
-'KRW-DOGE',
-
-'KRW-DOT',
-
-'KRW-ENJ',
-
-'KRW-EOS',
-
-'KRW-ETC',
-
-'KRW-ETH',
-
-'KRW-HBAR',
-
-'KRW-ICX',
-
-'KRW-IOST',
-
-'KRW-IOTA',
-
-'KRW-KAVA',
-
-'KRW-KNC',
-
-'KRW-LINK',
-
-'KRW-LTC',
-
-'KRW-MANA',
-
-'KRW-MTL',
-
-'KRW-NEO',
-
-'KRW-OMG',
-
-'KRW-ONT',
-
-'KRW-QTUM',
-
-'KRW-SAND',
-
-'KRW-SRM',
-
-'KRW-STMX',
-
-'KRW-THETA',
-
-'KRW-TRX',
-
-'KRW-VET',
-
-'KRW-WAVES',
-
-'KRW-XEM',
-
-'KRW-XLM',
-
-'KRW-XRP',
-
-'KRW-XTZ',
-
-'KRW-ZIL',
-
-'KRW-ZRX']
 
 
 
