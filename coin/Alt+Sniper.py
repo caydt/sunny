@@ -8,21 +8,21 @@ BC님, 트레이더92님. 정말 너무너무 감사 드립니다.
 
 """
 
- #########################################################################
+  #########################################################################
  # 업비트 로그인
  #########################################################################
 import pyupbit						
 import time	
-access = "엑세스키 입력"												
-secret = "시크릿키 입력"	
+access = "9iTK0V8wx8E63BxCmSii08gHZ0xzrBJWNkKPKGHk"												
+secret = "OFQb4bQti4SQlhksbDvifJfRxTbtDaj9KcnlrFXh"	
 upbit = pyupbit.Upbit(access, secret)	
 
 #########################################################################
 # 텔레그램 연결
 #########################################################################
 import telegram
-tlgm_token = '텔레그램 토큰'
-tlgm_id = '텔레그램 챗 아이디'
+tlgm_token = '1772750536:AAFHXUrrcXi15DnUyJ99ZEb5WwqOaZIOE6A'
+tlgm_id = '1059240009'
 bot = telegram.Bot(token = tlgm_token)
 updates = bot.getUpdates()
 bot.sendMessage(chat_id = tlgm_id, text = 'Alt Sniper')
