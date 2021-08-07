@@ -110,8 +110,11 @@ while True :
                             '＼VOL :'+v+
                             '＼VAL :'+vp+
                             '＼CP : '+ current_price +
-                            '＼TP : '+current_price*0.001+
-                            '＼BTP : '+current_price*0.035)
+                            '＼1TP : '+current_price*0.001+
+                            '＼2TP : '+current_price*0.01+
+                            '＼3TP : '+current_price*0.02+
+                            '＼4TP : '+current_price*0.03+
+                            '＼FTP : '+current_price*0.035 )
         
         if v_98 == max_v and t_98 == max_t and t_99 > 0 and v > 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
@@ -120,19 +123,25 @@ while True :
                             '＼VOL :'+v+
                             '＼VAL :'+vp+
                             '＼CP : '+ current_price +
-                            '＼TP : '+current_price*0.001+
-                            '＼BTP : '+current_price*0.035)
+                            '＼1TP : '+current_price*0.001+
+                            '＼2TP : '+current_price*0.01+
+                            '＼3TP : '+current_price*0.02+
+                            '＼4TP : '+current_price*0.03+
+                            '＼FTP : '+current_price*0.035 )
             
             
         if t_99 > mh-ml :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
-            bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : ' +ticker+" 2"+
-                            '＼VOL :' +v+
-                            '＼VAL :' +vp+
+             bot.sendMessage(chat_id = tlgm_id, text = 
+                            '＼TC : '+ticker+" 1"+
+                            '＼VOL :'+v+
+                            '＼VAL :'+vp+
                             '＼CP : '+ current_price +
-                            '＼PP : ' +current_price*0.001+
-                            '＼BTP : ' +current_price*0.035)
+                            '＼1TP : '+current_price*0.001+
+                            '＼2TP : '+current_price*0.01+
+                            '＼3TP : '+current_price*0.02+
+                            '＼4TP : '+current_price*0.03+
+                            '＼FTP : '+current_price*0.035 )
         
         else :
             print(time.strftime('%m-%d %H:%M:%S'),ticker,"   ",round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t))
