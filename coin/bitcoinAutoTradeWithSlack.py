@@ -5,7 +5,7 @@ import requests
 
 access = "9iTK0V8wx8E63BxCmSii08gHZ0xzrBJWNkKPKGHk"
 secret = "OFQb4bQti4SQlhksbDvifJfRxTbtDaj9KcnlrFXh"
-myToken = "xoxb-your-token"
+myToken = "xoxb-2365184784758-2395583142368-mx9DaxMVZ7hwxA4NI5W8FfJY"
 
 def post_message(token, channel, text):
     """슬랙 메시지 전송"""
@@ -51,7 +51,7 @@ def get_current_price(ticker):
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
 # 시작 메세지 슬랙 전송
-post_message(myToken,"#crypto", "autotrade start")
+post_message(myToken,"#python-coding", "autotrade start")
 
 while True:
     try:
@@ -66,7 +66,7 @@ while True:
             if target_price < current_price and ma15 < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    buy_result = upbit.buy_market_order("KRW-BTC", krw*0.9995)
+                    buy_result = upbit.buy_market_order("KRW-BTC", krw*0.5)
                     post_message(myToken,"#crypto", "BTC buy : " +str(buy_result))
         else:
             btc = get_balance("BTC")
