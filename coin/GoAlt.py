@@ -17,11 +17,20 @@ upbit = pyupbit.Upbit(access, secret)
 #########################################################################
 # 텔레그램 연결
 #########################################################################
-import telegram
-tlgm_token = '1772750536:AAFHXUrrcXi15DnUyJ99ZEb5WwqOaZIOE6A'
-tlgm_id = '1059240009'
-bot = telegram.Bot(token = tlgm_token)
-updates = bot.getUpdates()
+from slacker import Slacker
+import requests
+def post_message(token, channel, text):
+    response = requests.post("https://slack.com/api/chat.postMessage",
+                             headers={"Authorization": "Bearer " + token},
+                             data={"channel": channel, "text": text}
+                             )
+    print(response)
+
+
+myToken = "xoxb-2365184784758-2395583142368-mx9DaxMVZ7hwxA4NI5W8FfJY"
+
+post_message(myToken, '#python-coding', 'Alt Sniper Start')
+
 bot.sendMessage(chat_id = tlgm_id, text = 'Alt Sniper')
 print(bot.sendMessage)
 
@@ -37,9 +46,6 @@ margin = 0
 #########################################################################
 
 tickers = pyupbit.get_tickers(fiat = "KRW")
-
-tickers = [ticker]
-
 
 
 #########################################################################
@@ -95,50 +101,50 @@ while True :
         max_v = v.max(axis = 0)
         max_t = t.max(axis = 0)
         
-         
+         post_message(myToken, '#python-coding', 'Hello fellow slackers!')
         
         #########################################################################
         # 출력 지점
         #########################################################################
         if v_98 == max_v and t_98 == max_t and t_99 > 0 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
-            bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : '+ticker+" 1"+
-                            '＼VOL :'+v+
-                            '＼VAL :'+vp+
-                            '＼CP : '+ current_price +
-                            '＼1TP : '+current_price*0.001+
-                            '＼2TP : '+current_price*0.01+
-                            '＼3TP : '+current_price*0.02+
-                            '＼4TP : '+current_price*0.03+
-                            '＼FTP : '+current_price*0.035 )
+            post_message(myToken, '#python-coding', 
+                            '＼TC : '+str(ticker)+" 1"+
+                            '＼VOL :'+str(v)+
+                            '＼VAL :'+str(vp)+
+                            '＼CP : '+str(current_price) +
+                            '＼1TP : '+str(current_price*0.001)+
+                            '＼2TP : '+str(current_price*0.01)+
+                            '＼3TP : '+str(current_price*0.02)+
+                            '＼4TP : '+str(current_price*0.03)+
+                            '＼FTP : '+str(current_price*0.035))
         
         if v_98 == max_v and t_98 == max_t and t_99 > 0 and v > 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : '+ticker+" 1"+
-                            '＼VOL :'+v+
-                            '＼VAL :'+vp+
-                            '＼CP : '+ current_price +
-                            '＼1TP : '+current_price*0.001+
-                            '＼2TP : '+current_price*0.01+
-                            '＼3TP : '+current_price*0.02+
-                            '＼4TP : '+current_price*0.03+
-                            '＼FTP : '+current_price*0.035 )
+                            '＼TC : '+str(ticker)+" 1"+
+                            '＼VOL :'+str(v)+
+                            '＼VAL :'+str(vp)+
+                            '＼CP : '+str(current_price) +
+                            '＼1TP : '+str(current_price*0.001)+
+                            '＼2TP : '+str(current_price*0.01)+
+                            '＼3TP : '+str(current_price*0.02)+
+                            '＼4TP : '+str(current_price*0.03)+
+                            '＼FTP : '+str(current_price*0.035))
             
             
         if t_99 > mh-ml :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
              bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : '+ticker+" 1"+
-                            '＼VOL :'+v+
-                            '＼VAL :'+vp+
-                            '＼CP : '+ current_price +
-                            '＼1TP : '+current_price*0.001+
-                            '＼2TP : '+current_price*0.01+
-                            '＼3TP : '+current_price*0.02+
-                            '＼4TP : '+current_price*0.03+
-                            '＼FTP : '+current_price*0.035 )
+                            '＼TC : '+str(ticker)+" 2"+
+                            '＼VOL :'+str(v)+
+                            '＼VAL :'+str(vp)+
+                            '＼CP : '+str(current_price) +
+                            '＼1TP : '+str(current_price*0.001)+
+                            '＼2TP : '+str(current_price*0.01)+
+                            '＼3TP : '+str(current_price*0.02)+
+                            '＼4TP : '+str(current_price*0.03)+
+                            '＼FTP : '+str(current_price*0.035))
         
         else :
             print(time.strftime('%m-%d %H:%M:%S'),ticker,"   ",round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t))
