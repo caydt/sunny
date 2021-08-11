@@ -1,9 +1,17 @@
 import time
 import pyupbit
 import datetime
+import requests
 
 access = "9iTK0V8wx8E63BxCmSii08gHZ0xzrBJWNkKPKGHk"
 secret = "OFQb4bQti4SQlhksbDvifJfRxTbtDaj9KcnlrFXh"
+myToken = "xoxb-2365184784758-2395583142368-mx9DaxMVZ7hwxA4NI5W8FfJY"
+
+def post_message(token, channel, text):
+    """슬랙 메시지 전송"""
+    response = requests.post("https://slack.com/api/chat.postMessage",
+        headers={"Authorization": "Bearer "+token},
+        data={"channel": channel,"text": text}
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
@@ -18,9 +26,9 @@ def get_start_time(ticker):
     return start_time
 
 def get_ma15(ticker):
-    """15일 이동 평균선 조회"""
-    df = pyupbit.get_ohlcv(ticker, interval="day", count=15)
-    ma15 = df['close'].rolling(15).mean().iloc[-1]
+    """5일 이동 평균선 조회"""
+    df = pyupbit.get_ohlcv(ticker, interval="day", count=5)
+    ma15 = df['close'].rolling(5).mean().iloc[-1]
     return ma15
 
 def get_balance(ticker):
@@ -41,6 +49,7 @@ def get_current_price(ticker):
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
+post_message(myToken,"#python-coding", "autotrade start")
 
 # 자동매매 시작
 while True:
@@ -56,12 +65,16 @@ while True:
             if target_price < current_price and ma15 < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order("KRW-BTC", krw*0.5)
+                    buy_result = upbit.buy_market_order("KRW-BTC", krw*0.5)
+                    post_message(myToken,"#python-coding", "BTC buy : " +str(buy_result))
         else:
             btc = get_balance("BTC")
             if btc > 0.00008:
                 upbit.sell_market_order("KRW-BTC", btc*0.9995)
+                post_message(myToken,"#python-coding", "BTC buy : " +str(sell_result))
         time.sleep(1)
-    except Exception as e:
+                             
+     except Exception as e:
         print(e)
+        post_message(myToken,"#ython-coding", e)
         time.sleep(1)
