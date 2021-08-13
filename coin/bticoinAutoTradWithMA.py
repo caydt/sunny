@@ -73,9 +73,8 @@ while True:
             if btc > 0.00008:
                 sell_result = upbit.sell_market_order("KRW-BTC", btc*0.9995)
                 bot.sendMessage(chat_id = tlgm_id, text = "BTC Sell : " +str(sell_result))
-        time.sleep(1)
-                             
-     except Exception as e:
+       time.sleep(1)
+    
+    except Exception as e:
         print(e)
-        bot.sendMessage(chat_id = tlgm_id, text = "AutoTradeWithMA ERROR")
         time.sleep(1)
