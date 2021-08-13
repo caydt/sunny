@@ -101,8 +101,7 @@ while True :
         max_v = v.max(axis = 0)
         max_t = t.max(axis = 0)
         
-         post_message(myToken, '#python-coding', 'Hello fellow slackers!')
-        
+                
         #########################################################################
         # 출력 지점
         #########################################################################
@@ -145,7 +144,7 @@ while True :
                             '＼3TP : '+str(current_price*0.02)+
                             '＼4TP : '+str(current_price*0.03)+
                             '＼FTP : '+str(current_price*0.035))
-         if t_99 > mh-ml and 2 * v_100 :
+        if t_99 > mh-ml and 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
              bot.sendMessage(chat_id = tlgm_id, text = 
                             '＼TC : '+str(ticker)+" 2V"+
