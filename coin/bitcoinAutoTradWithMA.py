@@ -1,18 +1,9 @@
 import time
 import pyupbit
 import datetime
-import requests
-import telegram
 
 access = "9iTK0V8wx8E63BxCmSii08gHZ0xzrBJWNkKPKGHk"
 secret = "OFQb4bQti4SQlhksbDvifJfRxTbtDaj9KcnlrFXh"
-
-
-tlgm_token = '1772750536:AAFHXUrrcXi15DnUyJ99ZEb5WwqOaZIOE6A'
-tlgm_id = '1059240009'
-bot = telegram.Bot(token = tlgm_token)
-updates = bot.getUpdates()
-bot.sendMessage(chat_id = tlgm_id, text = 'BATWMA')
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
@@ -27,7 +18,7 @@ def get_start_time(ticker):
     return start_time
 
 def get_ma15(ticker):
-    """5일 이동 평균선 조회"""
+    """15일 이동 평균선 조회"""
     df = pyupbit.get_ohlcv(ticker, interval="day", count=5)
     ma15 = df['close'].rolling(5).mean().iloc[-1]
     return ma15
@@ -50,7 +41,6 @@ def get_current_price(ticker):
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
-bot.sendMessage(chat_id = tlgm_id, text = "AutoTradeWithMA START")
 
 # 자동매매 시작
 while True:
@@ -66,16 +56,12 @@ while True:
             if target_price < current_price and ma15 < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    buy_result = upbit.buy_market_order("KRW-BTC", krw*0.5)
-                    bot.sendMessage(chat_id = tlgm_id, text = "BTC Buy : " +str(buy_result['price']))
-                    
+                    upbit.buy_market_order("KRW-BTC", krw*0.5)
         else:
             btc = get_balance("BTC")
             if btc > 0.00008:
-                sell_result = upbit.sell_market_order("KRW-BTC", btc*0.9995)
-                bot.sendMessage(chat_id = tlgm_id, text = "BTC Sell : " +str(sell_result['price']))
+                upbit.sell_market_order("KRW-BTC", btc*0.9995)
         time.sleep(1)
-    
     except Exception as e:
         print(e)
         time.sleep(1)
