@@ -94,8 +94,8 @@ while True :
         #########################################################################
         if v_98 == max_v and t_98 == max_t and t_99 > 0 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
-            bot.sendMessage(chat_id = tlgm_id, text = 
-                            'TC : '+str(ticker)+" 1",
+            bot.sendMessage(chat_id = tlgm_id, text = +
+                            ('TC : '+str(ticker)+" 1",
                             'CP : '+str(current_price),
                             '1TP : '+str(current_price*1.001),
                             '2TP : '+str(current_price*1.01),
@@ -105,12 +105,12 @@ while True :
                             'VOL :'+str(v_98),
                             'VOLP :'+str(v_99),
                             'VAL :'+str(vp_98),
-                            'VALP :'+str(vp_99),sep='\n')
+                            'VALP :'+str(vp_99),sep=="\n"))
         
         if v_98 == max_v and t_98 == max_t and t_99 > 0 and v > 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            'TC : '+str(ticker)+" 1V",
+                           ('TC : '+str(ticker)+" 1V",
                             'CP : '+str(current_price),
                             '1TP : '+str(current_price*1.001),
                             '2TP : '+str(current_price*1.01),
@@ -120,12 +120,12 @@ while True :
                             'VOL :'+str(v_98),
                             'VOLP :'+str(v_99),
                             'VAL :'+str(vp_98),
-                            'VALP :'+str(vp_99),sep='\n')
+                            'VALP :'+str(vp_99),sep=='\n'))
             
         if t_99 > mh-ml :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            'TC : '+str(ticker)+" 2",
+                              ('TC : '+str(ticker)+" 2",
                             'CP : '+str(current_price),
                             '1TP : '+str(current_price*1.001),
                             '2TP : '+str(current_price*1.01),
@@ -135,12 +135,12 @@ while True :
                             'VOL :'+str(v_98),
                             'VOLP :'+str(v_99),
                             'VAL :'+str(vp_98),
-                            'VALP :'+str(vp_99),sep='\n')
+                            'VALP :'+str(vp_99),sep=='\n'))
             
         if t_99 > mh-ml and 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            'TC : '+str(ticker)+" 2V",
+                             ('TC : '+str(ticker)+" 2V",
                             'CP : '+str(current_price),
                             '1TP : '+str(current_price*1.001),
                             '2TP : '+str(current_price*1.01),
@@ -150,7 +150,7 @@ while True :
                             'VOL :'+str(v_98),
                             'VOLP :'+str(v_99),
                             'VAL :'+str(vp_98),
-                            'VALP :'+str(vp_99),sep='\n')
+                            'VALP :'+str(vp_99),sep=='\n'))
         
         else :
             print(time.strftime('%m-%d %H:%M:%S'),ticker,"   ",round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t))
