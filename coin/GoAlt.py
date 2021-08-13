@@ -78,10 +78,12 @@ while True :
         v_98 = v[98]        
         t_98 = t[98]
         h_98 = t[98]
+        vp_98 = vp[98]
         
         v_99 = v[99]
         t_99 = t[99]
         h_99 = h[99]
+        vp_99 = vp[99]
         
         max_v = v.max(axis = 0)
         max_t = t.max(axis = 0)
@@ -93,54 +95,62 @@ while True :
         if v_98 == max_v and t_98 == max_t and t_99 > 0 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : '+str(ticker)+" 1V"+
-                            '＼VOL :'+str(v)+
-                            '＼VAL :'+str(vp)+
-                            '＼CP : '+str(current_price) +
-                            '＼1TP : '+str(current_price*0.001)+
-                            '＼2TP : '+str(current_price*0.01)+
-                            '＼3TP : '+str(current_price*0.02)+
-                            '＼4TP : '+str(current_price*0.03)+
-                            '＼FTP : '+str(current_price*0.035))
+                            'TC : '+str(ticker)+" 1",
+                            'CP : '+str(current_price),
+                            '1TP : '+str(current_price*1.001),
+                            '2TP : '+str(current_price*1.01),
+                            '3TP : '+str(current_price*1.02),
+                            '4TP : '+str(current_price*1.03),
+                            'FTP : '+str(current_price*1.035),
+                            'VOL :'+str(v_98),
+                            'VOLP :'+str(v_99),
+                            'VAL :'+str(vp_98),
+                            'VALP :'+str(vp_99),sep='\n')
         
         if v_98 == max_v and t_98 == max_t and t_99 > 0 and v > 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : '+str(ticker)+" 1V"+
-                            '＼VOL :'+str(v)+
-                            '＼VAL :'+str(vp)+
-                            '＼CP : '+str(current_price) +
-                            '＼1TP : '+str(current_price*0.001)+
-                            '＼2TP : '+str(current_price*0.01)+
-                            '＼3TP : '+str(current_price*0.02)+
-                            '＼4TP : '+str(current_price*0.03)+
-                            '＼FTP : '+str(current_price*0.035))
-            
+                            'TC : '+str(ticker)+" 1V",
+                            'CP : '+str(current_price),
+                            '1TP : '+str(current_price*1.001),
+                            '2TP : '+str(current_price*1.01),
+                            '3TP : '+str(current_price*1.02),
+                            '4TP : '+str(current_price*1.03),
+                            'FTP : '+str(current_price*1.035),
+                            'VOL :'+str(v_98),
+                            'VOLP :'+str(v_99),
+                            'VAL :'+str(vp_98),
+                            'VALP :'+str(vp_99),sep='\n')
             
         if t_99 > mh-ml :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : '+str(ticker)+" 2"+
-                            '＼VOL :'+str(v)+
-                            '＼VAL :'+str(vp)+
-                            '＼CP : '+str(current_price) +
-                            '＼1TP : '+str(current_price*0.001)+
-                            '＼2TP : '+str(current_price*0.01)+
-                            '＼3TP : '+str(current_price*0.02)+
-                            '＼4TP : '+str(current_price*0.03)+
-                            '＼FTP : '+str(current_price*0.035))
+                            'TC : '+str(ticker)+" 2",
+                            'CP : '+str(current_price),
+                            '1TP : '+str(current_price*1.001),
+                            '2TP : '+str(current_price*1.01),
+                            '3TP : '+str(current_price*1.02),
+                            '4TP : '+str(current_price*1.03),
+                            'FTP : '+str(current_price*1.035),
+                            'VOL :'+str(v_98),
+                            'VOLP :'+str(v_99),
+                            'VAL :'+str(vp_98),
+                            'VALP :'+str(vp_99),sep='\n')
+            
         if t_99 > mh-ml and 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                            '＼TC : '+str(ticker)+" 2V"+
-                            '＼VOL :'+str(v)+
-                            '＼VAL :'+str(vp)+
-                            '＼CP : '+str(current_price) +
-                            '＼1TP : '+str(current_price*0.001)+
-                            '＼2TP : '+str(current_price*0.01)+
-                            '＼3TP : '+str(current_price*0.02)+
-                            '＼4TP : '+str(current_price*0.03)+
-                            '＼FTP : '+str(current_price*0.035))
+                            'TC : '+str(ticker)+" 2V",
+                            'CP : '+str(current_price),
+                            '1TP : '+str(current_price*1.001),
+                            '2TP : '+str(current_price*1.01),
+                            '3TP : '+str(current_price*1.02),
+                            '4TP : '+str(current_price*1.03),
+                            'FTP : '+str(current_price*1.035),
+                            'VOL :'+str(v_98),
+                            'VOLP :'+str(v_99),
+                            'VAL :'+str(vp_98),
+                            'VALP :'+str(vp_99),sep='\n')
         
         else :
             print(time.strftime('%m-%d %H:%M:%S'),ticker,"   ",round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t))
