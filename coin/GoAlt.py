@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Mar 23 23:36:39 2021
-생존형 퀀트의 경제적자유   https://blog.naver.com/starfox119
-BC님, 트레이더92님. 정말 너무너무 감사 드립니다. 
-"""
-
  #########################################################################
  # 업비트 로그인
  #########################################################################
@@ -17,22 +10,13 @@ upbit = pyupbit.Upbit(access, secret)
 #########################################################################
 # 텔레그램 연결
 #########################################################################
-from slacker import Slacker
-import requests
-def post_message(token, channel, text):
-    response = requests.post("https://slack.com/api/chat.postMessage",
-                             headers={"Authorization": "Bearer " + token},
-                             data={"channel": channel, "text": text}
-                             )
-    print(response)
+import telegram
 
-
-myToken = "xoxb-2365184784758-2395583142368-mx9DaxMVZ7hwxA4NI5W8FfJY"
-
-post_message(myToken, '#python-coding', 'Alt Sniper Start')
-
+tlgm_token = '1772750536:AAFHXUrrcXi15DnUyJ99ZEb5WwqOaZIOE6A'
+tlgm_id = '1059240009'
+bot = telegram.Bot(token = tlgm_token)
+updates = bot.getUpdates()
 bot.sendMessage(chat_id = tlgm_id, text = 'Alt Sniper')
-print(bot.sendMessage)
 
 #########################################################################
 # 변수 초기값
@@ -59,6 +43,7 @@ while True :
         ######################################################################### 
         abp = upbit.get_avg_buy_price(ticker)         
         current_price = pyupbit.get_current_price(ticker)
+
         if abp > 0 :
             margin = (current_price - abp)/abp
         
@@ -107,8 +92,8 @@ while True :
         #########################################################################
         if v_98 == max_v and t_98 == max_t and t_99 > 0 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_98),":",round(max_v),"///",round(t_98),":",round(max_t),'\033[0m')
-            post_message(myToken, '#python-coding', 
-                            '＼TC : '+str(ticker)+" 1"+
+            bot.sendMessage(chat_id = tlgm_id, text = 
+                            '＼TC : '+str(ticker)+" 1V"+
                             '＼VOL :'+str(v)+
                             '＼VAL :'+str(vp)+
                             '＼CP : '+str(current_price) +
@@ -134,7 +119,7 @@ while True :
             
         if t_99 > mh-ml :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
-             bot.sendMessage(chat_id = tlgm_id, text = 
+            bot.sendMessage(chat_id = tlgm_id, text = 
                             '＼TC : '+str(ticker)+" 2"+
                             '＼VOL :'+str(v)+
                             '＼VAL :'+str(vp)+
@@ -146,7 +131,7 @@ while True :
                             '＼FTP : '+str(current_price*0.035))
         if t_99 > mh-ml and 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
-             bot.sendMessage(chat_id = tlgm_id, text = 
+            bot.sendMessage(chat_id = tlgm_id, text = 
                             '＼TC : '+str(ticker)+" 2V"+
                             '＼VOL :'+str(v)+
                             '＼VAL :'+str(vp)+
