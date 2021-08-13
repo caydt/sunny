@@ -2,16 +2,17 @@ import time
 import pyupbit
 import datetime
 import requests
+import telegram
 
 access = "9iTK0V8wx8E63BxCmSii08gHZ0xzrBJWNkKPKGHk"
 secret = "OFQb4bQti4SQlhksbDvifJfRxTbtDaj9KcnlrFXh"
-myToken = "xoxb-2365184784758-2395583142368-mx9DaxMVZ7hwxA4NI5W8FfJY"
 
-def post_message(token, channel, text):
-    """슬랙 메시지 전송"""
-    response = requests.post("https://slack.com/api/chat.postMessage",
-        headers={"Authorization": "Bearer "+token},
-        data={"channel": channel,"text": text}
+
+tlgm_token = '1772750536:AAFHXUrrcXi15DnUyJ99ZEb5WwqOaZIOE6A'
+tlgm_id = '1059240009'
+bot = telegram.Bot(token = tlgm_token)
+updates = bot.getUpdates()
+bot.sendMessage(chat_id = tlgm_id, text = 'BATWMA')
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
@@ -49,7 +50,7 @@ def get_current_price(ticker):
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
-post_message(myToken,"#python-coding", "autotrade start")
+bot.sendMessage(chat_id = tlgm_id, text = "AutoTradeWithMA START")
 
 # 자동매매 시작
 while True:
@@ -66,12 +67,12 @@ while True:
                 krw = get_balance("KRW")
                 if krw > 5000:
                     buy_result = upbit.buy_market_order("KRW-BTC", krw*0.5)
-                    post_message(myToken,"#python-coding", "BTC buy : " +str(buy_result))
+                    bot.sendMessage(chat_id = tlgm_id, text = "BTC Buy : " +str(buy_result))
         else:
             btc = get_balance("BTC")
             if btc > 0.00008:
-                upbit.sell_market_order("KRW-BTC", btc*0.9995)
-                post_message(myToken,"#python-coding", "BTC buy : " +str(sell_result))
+                sell_result = upbit.sell_market_order("KRW-BTC", btc*0.9995)
+                bot.sendMessage(chat_id = tlgm_id, text = "BTC Sell : " +str(sell_result))
         time.sleep(1)
                              
      except Exception as e:
