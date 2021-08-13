@@ -67,12 +67,13 @@ while True:
                 krw = get_balance("KRW")
                 if krw > 5000:
                     buy_result = upbit.buy_market_order("KRW-BTC", krw*0.5)
-                    bot.sendMessage(chat_id = tlgm_id, text = "BTC Buy : " +str(buy_result))
+                    bot.sendMessage(chat_id = tlgm_id, text = "BTC Buy : " +str(buy_result['price']))
+                    
         else:
             btc = get_balance("BTC")
             if btc > 0.00008:
                 sell_result = upbit.sell_market_order("KRW-BTC", btc*0.9995)
-                bot.sendMessage(chat_id = tlgm_id, text = "BTC Sell : " +str(sell_result))
+                bot.sendMessage(chat_id = tlgm_id, text = "BTC Sell : " +str(sell_result['price']))
         time.sleep(1)
     
     except Exception as e:
