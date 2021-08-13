@@ -77,5 +77,5 @@ while True:
                              
      except Exception as e:
         print(e)
-        post_message(myToken,"#ython-coding", e)
+        bot.sendMessage(chat_id = tlgm_id, text = "AutoTradeWithMA ERROR")
         time.sleep(1)
