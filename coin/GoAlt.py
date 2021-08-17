@@ -12,7 +12,7 @@ upbit = pyupbit.Upbit(access, secret)
 #########################################################################
 import telegram
 
-tlgm_token = '1772750536:AAFHXUrrcXi15DnUyJ99ZEb5WwqOaZIOE6A'
+tlgm_token = '1916811134:AAEn2wp-Y1cQBT61y2xxU3-neZUIlr0k0m4'
 tlgm_id = '1059240009'
 bot = telegram.Bot(token = tlgm_token)
 updates = bot.getUpdates()
