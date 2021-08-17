@@ -16,7 +16,7 @@ tlgm_token = '1916811134:AAEn2wp-Y1cQBT61y2xxU3-neZUIlr0k0m4'
 tlgm_id = '1059240009'
 bot = telegram.Bot(token = tlgm_token)
 updates = bot.getUpdates()
-bot.sendMessage(chat_id = tlgm_id, text = 'Alt Sniper')
+bot.sendMessage(chat_id = tlgm_id, text = 'GoAlt')
 
 #########################################################################
 # 변수 초기값
