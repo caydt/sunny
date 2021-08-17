@@ -125,7 +125,7 @@ while True :
         if t_99 > mh-ml :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                              ('TC : '+str(ticker)+" 2",
+                            ('TC : '+str(ticker)+" 2",
                             'CP : '+str(current_price),
                             '1TP : '+str(current_price*1.001),
                             '2TP : '+str(current_price*1.01),
@@ -140,7 +140,7 @@ while True :
         if t_99 > mh-ml and 2 * v_100 :
             print('\033[31m',time.strftime('%m-%d %H:%M:%S'),ticker,"   ", round(abp),round(margin,4),"///",round(v_99),":",round(max_v),"///",round(t_99),":",round(max_t),'\033[0m')
             bot.sendMessage(chat_id = tlgm_id, text = 
-                             ('TC : '+str(ticker)+" 2V",
+                            ('TC : '+str(ticker)+" 2V",
                             'CP : '+str(current_price),
                             '1TP : '+str(current_price*1.001),
                             '2TP : '+str(current_price*1.01),
