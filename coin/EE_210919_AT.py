@@ -539,7 +539,7 @@ while True :
             
             ((ticker_balance * current_price) > 5000) 
                 
-             upbit.sell_market_order(ticker, str(round(current_price*1.005,2)),ticker_balance*0.9995)
+            upbit.sell_market_order(ticker, str(round(current_price*1.005,2)),ticker_balance*0.9995)
         
        
         ######################################################################
