@@ -2,7 +2,9 @@
 
 생존형퀀트의 경제적자유. https://blog.naver.com/starfox119
 
-2021.09.161. 완료 /// 코인별 시가총액 매주 갱신할 것.(수동)
+2021.09.16
+
+1. 완료 /// 코인별 시가총액 매주 갱신할 것.(수동)
 
 2. 시가 총액 대비 거래대금 비교를 통하여 급등 예측 해볼 것
 
@@ -22,7 +24,7 @@
 #########################################################################
 # 업비트 로그인
 #########################################################################
-import pyupbit
+import pyupbit						
 # 업비트에서 필요한 값들을 불러오기 위해 필요한 모듈
 
 import time	
@@ -360,7 +362,12 @@ while True :
             except ZeroDivisionError:
                 print("ZeroDivision")
                 # 0으로 나뉘지지 않기 때문에 입력한 에러방지용 코드
+            
+            if (margin > 0.05 and (ticker_balance * current_price) < 25000) :
+                upbit.sell_market_order(ticker, ticker_balance * 0.9995)
                 
+                if (margin > 0.05 and (ticker_balance * current_price) > 24999) :
+                    upbit.sell_market_order(ticker, ticker_balance * 0.7)
         
         ######################################################################
         #                                                                    # 
@@ -497,7 +504,8 @@ while True :
             operation_df.loc[(operation_df.ticker == ticker),     'resist_line'] = max_high_7[-1]
             operation_df.loc[(operation_df.ticker == ticker),        'out_time'] = time.time()
             
-                        
+            upbit.sell_market_order(ticker, ticker_balance * 0.9995)
+            
             print(ticker, ' min_low_69[-1] < min_low_69[-2]')
             print('##############################')
                 
@@ -506,9 +514,7 @@ while True :
                             '\n조건: get_out 신호'  + 
                             '\n현재가: ' + str(round(current_price,2)))
             # 텔레그램 메세지에 필요한 정보들을 송출합니다. 
-            if ((ticker_balance * current_price) > 5000) :
-                upbit.sell_market_order(ticker, ticker_balance*0.9995)      
-        
+              
         ######################################################################
         # 매수1. 전고점 돌파  
         ######################################################################
@@ -519,6 +525,9 @@ while True :
                 ma2[-1] > resist_line ) : 
                 operation_df.loc[(operation_df.ticker == ticker),      'get_in'] = 1
                 operation_df.loc[(operation_df.ticker == ticker),     'in_time'] = time.time()
+                
+                upbit.buy_market_order(ticker, krw_balance*0.25)
+                
                 # 현재 시간을 in_time에 저장. 유동적 거래량 이평 생성에 활용
                 
                 # 텔레그램 알림
@@ -527,21 +536,10 @@ while True :
                                 '\n조건: get_in 신호' + 
                                 '\n현재가: ' + str(round(current_price,2)))            
                 
-                upbit.buy_market_order(ticker, krw_balance*0.25)
                 
-              
+                        
+            
         
-        if ((ticker_balance * current_price) < 5000 and
-            get_in == 0) :
-            if (max_high_69[-1] > max_high_69[-2] or 
-                ma2[-1] > resist_line ) : 
-                operation_df.loc[(operation_df.ticker == ticker),      'get_in'] = 1
-                operation_df.loc[(operation_df.ticker == ticker),     'in_time'] = time.time()
-                ((ticker_balance * current_price) > 5000) 
-                
-                upbit.sell_market_order(ticker, str(round(current_price*1.005,2)),ticker_balance*0.9995)
-        
-                                       
         ######################################################################
         #                                                                    # 
         #                                                                    #
@@ -562,10 +560,98 @@ while True :
         if ticker == "KRW-BTC" :
             print("----------------------------------------------------")
             
-            
         
         ######################################################################
         # 0.5초 간격으로 티커별 현황조회
         ######################################################################  
         time.sleep(0.5)
         
+        
+        
+        '''
+        #########################################################################
+        # 특정 시간 설정 예시
+        #########################################################################
+        #current_time = time.strftime("%H:%M")
+        #start_time = "23:00"
+        #end_time = "04:00"
+                
+        #if (current_time >= start_time) and (current_time <= end_time) : 
+        #    stop_time = 1
+        #else : 
+        #    stop_time = 0
+        
+        
+        #########################################################################
+        # 거래량 체크 타이머
+        #########################################################################
+        current_time_minute = time.strftime("%M")
+        ma180_check_start = "55"
+        ma180_check_end = "59"
+        if current_time_minute >= ma180_check_start and current_time_minute <= ma180_check_end :
+            ma180_check = 1
+        else :
+            ma180_check = 0
+            
+           
+                        
+        ######################################################################
+        # 특정 시간 도달 시 전체 코인 검색 시작
+        ###################################################################### 
+        if ma180_check == 1 :
+            tickers = pyupbit.get_tickers(fiat = "KRW")
+        
+        if ma180_check == 1 :
+            if ma60[199] > ma180[199] :
+                if ticker not in crypto_commando :
+                    crypto_commando.append(ticker)
+        
+            else :
+                if ticker_balance * current_price > 5000 :
+                    if ticker not in crypto_commando :
+                        crypto_commando.append(ticker)
+                    
+                if ticker_balance * current_price <= 5000 :
+                    if ticker in crypto_commando :
+                        crypto_commando.remove(ticker)
+        '''
+                
+        
+        '''
+        #########################################################################
+        #########################################################################
+        # 
+        # Crypto Commander의 핵심 기능. 텔레그램 주문 처리
+        # 
+        #########################################################################
+        #########################################################################
+        
+        #########################################################################
+        # 텔레그램을 통해서 매도 주문 처리하기 .. 특정 코인 매도
+        #########################################################################  
+        telegram_id = bot.getUpdates()[-1].message.chat.id                      # 마지막 메세지 보낸 사람 ID확인
+        telegram_message = bot.getUpdates()[-1].message.text                    # 마지막 메세지 확인        
+        if telegram_id == 1059240009 : 
+            if 'KRW' in telegram_message :                                      # 텔레그램에 KRW라는 텍스트가 있다면, 
+                ticker = telegram_message                                       # 메세지는 티커가 되고
+                ticker_balance = upbit.get_balance(ticker)                      # 티커 잔고 확인 후에
+                sell_record0 = upbit.sell_market_order(ticker, ticker_balance)  # 전량매도
+                winners.append(ticker)                                          # 상승 중 매도했으므로 winners에 포함    
+                duplication_remove = set(winners)                               # 중복되는 경우가 있어서 중복된 티커는 삭제
+                winners = list(duplication_remove)                              # 삭제 후 리스트 형태로 재정리
+                
+        
+                
+        
+        '''
+        '''
+        if current_second > 58 :
+            telegram_id = bot.getUpdates()[-1].message.chat.id                      # 마지막 메세지 보낸 사람 ID확인
+            telegram_message = bot.getUpdates()[-1].message.text
+            if telegram_id == 1059240009 : 
+                if 'KRW' in telegram_message :     
+                    print("OKAY")
+                else :
+                    print('nothing')
+        '''
+                
